@@ -1,0 +1,33 @@
+<annotation>
+	<folder>VOC2007</folder>
+	<filename>finger19_000_000180.jpg</filename>
+	<source>
+		<database>The VOC2007 Database</database>
+		<annotation>PASCAL VOC2007</annotation>
+		<image_dict>flickr</image_dict>
+		<flickrid>NULL</flickrid>
+	</source>
+	<owner>
+		<flickrid>NULL</flickrid>
+		<name>pjq</name>
+	</owner>
+	<size>
+		<width>1280</width>
+		<height>2258</height>
+		<depth>3</depth>
+	</size>
+		<segmented>0</segmented>
+	<object>
+		<name>finger2</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>232.0</xmin>
+			<ymin>1122.0</ymin>
+			<xmax>322.0</xmax>
+			<ymax>1172.0</ymax>
+		</bndbox>
+		<keypoints>257,1133,336,1238</keypoints>
+	</object>
+</annotation>

@@ -1,0 +1,2 @@
+0dd2215697c2175985c884613ad68cd4  data/pretrained/pth/model-face-person.pth
+b511221ff46072a6bafa5fae6c5f5062  data/pretrained/onnx/model-face-person.onnx
