@@ -42,4 +42,4 @@
 - 升级可支持RK芯片NPU(如RK1808 RV1109/RV1126)
 - 提供人体(person)检测模型，包括C++版本
 
-<img src="./test.png" width="350" height="700">
+<img src="./test.png">
