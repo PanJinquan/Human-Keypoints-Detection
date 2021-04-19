@@ -3,16 +3,15 @@
 ## 1.目录结构
 
 ```
-├── configs
-├── data
-├── demo
-├── libs
-├── models
-├── README.md
-├── requirements.txt
-├── utils
-└── demo.py
-
+├── configs                # 模型配置文件
+├── models                 # 模型文件
+├── data                   # 数据
+├── demo                   # demo文件
+├── libs                   # 第三方库文件
+├── utils                  # 工具包
+├── README.md              # 说明文件
+├── requirements.txt       #
+└── demo.py                # demo测试文件
 ```
 
 ## 2. Train
