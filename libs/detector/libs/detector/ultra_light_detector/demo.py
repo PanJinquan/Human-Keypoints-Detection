@@ -35,8 +35,10 @@ def get_parser():
     parser.add_argument('--iou_threshold', default=0.3, type=float, help='iou_threshold')
     parser.add_argument('--candidate_size', default=200, type=int, help='nms candidate size')
     parser.add_argument('--image_dir', default=image_dir, type=str, help='directory or image path')
-    parser.add_argument('--device', default="cuda:0", type=str, help='cuda:0 or cpu')
+    parser.add_argument("-d",'--device', default="cuda:0", type=str, help='cuda:0 or cpu')
     parser.add_argument('--priors_type', default=priors_type, type=str, help='priors type:face or person')
+    parser.add_argument("-i", "--image_file", help="image file or directory", default="", type=str)
+    parser.add_argument("-v", "--video_file", help="video file", default=0, type=str or int)
     args = parser.parse_args()
     return args
 

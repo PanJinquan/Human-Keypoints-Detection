@@ -66,8 +66,8 @@ class PoseEstimation(inference.PoseEstimation):
             if count % detect_freq == 0:
                 kp_points, kp_scores, boxes = self.detect_image(frame,
                                                                 threshhold=self.threshhold,
-                                                                detect_person=False)
-                self.show_result(frame, boxes, kp_points, kp_scores, self.skeleton, waitKey=10)
+                                                                detect_person=True)
+                self.show_result(frame, boxes, kp_points, kp_scores, self.skeleton, waitKey=5)
             if save_video:
                 self.video_writer.write(frame)
             count += 1
@@ -81,7 +81,6 @@ class PoseEstimation(inference.PoseEstimation):
             boxes = bbox_score[:, 0:4]
             scores = bbox_score[:, 4:5]
         return boxes, scores
-
 
     @debug.run_time_decorator("detect_pose")
     def detect_pose(self, image, boxes, threshhold):
@@ -147,15 +146,25 @@ class PoseEstimation(inference.PoseEstimation):
         return vis_image
 
 
+def get_parser():
+    parser = argparse.ArgumentParser(description="Training Pipeline")
+    # parser.add_argument("-c", "--config_file", help="configs file", default="configs/config.yaml", type=str)
+    parser.add_argument("-d", "--device", help="device: device or cuda", default="cpu", type=str)
+    parser.add_argument("-i", "--image_file", help="image file or directory", default="", type=str)
+    parser.add_argument("-v", "--video_file", help="video file", default=0, type=str or int)
+    return parser
+
+
 if __name__ == '__main__':
-    # 自定义MPII上半身6个关键点
-    # hp = PoseEstimation(config=val_config.body_mpii_192_256, device="cuda:0")
+    parser = get_parser().parse_args()
     # COCO共17个关键点
-    # hp = PoseEstimation(config=val_config.person_coco_192_256, device="cuda:0")
-    # 自定义COCO上半身11个关键点
-    # hp = PoseEstimation(config=val_config.body_coco_192_256, device="cuda:0")
-    hp = PoseEstimation(config=val_config.body_coco_192_256, device="cpu")
-    image_dir = "data/test_images"
-    hp.detect_image_dir(image_dir, detect_person=True, waitKey=0)
-    # hp.start_capture(video_path=video_path, save_video=save_video)
-    # hp.start_capture(video_path)
+    hp = PoseEstimation(config=val_config.person_coco_192_256, device=parser.device)
+    if parser.image_file:
+        # 测试图片
+        hp.detect_image_dir(image_dir=parser.image_file, detect_person=True, waitKey=0)
+    elif isinstance(parser.video_file, str):
+        # 测试视频文件
+        hp.start_capture(video_path=parser.video_file, save_video=None)
+    else:
+        # 测试摄像头
+        hp.start_capture(video_path=int(parser.video_file))

@@ -10,7 +10,7 @@
 import datetime
 import logging
 from logging.handlers import TimedRotatingFileHandler
-from memory_profiler import profile
+# from memory_profiler import profile
 
 
 def set_logging(name, level="info", logfile=None):
@@ -86,7 +86,7 @@ def run_time_decorator(title=""):
 logger = set_logging(name="LOG", level="debug", logfile=None)
 
 
-@profile(precision=4)
+# @profile(precision=4)
 def memory_test():
     """
     1.先导入：
