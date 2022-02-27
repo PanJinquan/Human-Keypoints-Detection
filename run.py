@@ -18,7 +18,7 @@ import argparse
 sys.path.append(os.path.dirname(__file__))
 from configs import val_config
 from libs.detector.libs.detector.detector import Detector
-from utils import image_processing, debug, file_processing, torch_tools
+from utils import image_processing, debug, file_processing
 from models import inference
 
 project_root = os.path.dirname(__file__)
@@ -97,7 +97,20 @@ class PoseEstimation(inference.PoseEstimation):
             h, w, d = frame.shape
             boxes = [[0, 0, w, h]]
         key_points, kp_scores = self.detect_pose(frame, boxes, threshhold)
+        self.save_data(key_points, kp_scores, boxes)
         return key_points, kp_scores, boxes
+
+    def save_data(self, key_points, kp_scores, boxes):
+        key_points = [d.tolist() for d in key_points]
+        kp_scores = [d.tolist() for d in kp_scores]
+        boxes = [d.tolist() for d in boxes]
+        result = {"key_points": key_points, "kp_scores": kp_scores, "boxes": boxes}
+        file = "data/result/{}.json".format(file_processing.get_time(format="P"))
+        file_processing.create_file_path(file)
+        file_processing.write_json_path(file, result)
+        print(file)
+        print(result)
+        print("====="*10)
 
     def detect_image_dir(self, image_dir, detect_person=True, waitKey=0):
         image_list = file_processing.get_files_lists(image_dir)

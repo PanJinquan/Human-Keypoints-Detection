@@ -9,6 +9,7 @@ docker/codes/
 .polyaxon
 build/
 dist/
+data/result/
 .ipynb_checkpoints/
 .DS_Store
 pip
