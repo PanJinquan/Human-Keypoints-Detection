@@ -8,11 +8,12 @@ __pycache__/
 docker/codes/
 .polyaxon
 build/
+dist/
 .ipynb_checkpoints/
 .DS_Store
 pip
 eth.yaml
-
+run.spec
 *.whl
 *.so
 
