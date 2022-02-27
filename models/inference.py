@@ -94,7 +94,6 @@ class PoseEstimation():
         model.load_state_dict(state_dict)
         return model
 
-    @debug.run_time_decorator("detect")
     def detect(self, image, bboxes, threshhold=0.3):
         """
         image:image
@@ -142,7 +141,6 @@ class PoseEstimation():
         key_point, kp_score = self.post_process(bgr_image, output, center, scale, threshhold)
         return key_point, kp_score
 
-    @debug.run_time_decorator("forward")
     def forward(self, input_tensor):
         with torch.no_grad():
             input_tensor = input_tensor.to(self.device)
@@ -194,7 +192,6 @@ class PoseEstimation():
         input = cv2.warpAffine(image, trans, (self.input_size[0], self.input_size[1]), flags=cv2.INTER_LINEAR)
         return input, center, scale
 
-    @debug.run_time_decorator("post_process")
     def post_process(self, bgr_image, heatmap, center, scale, threshhold):
         # compute coordinate
         key_point, kp_score = self.get_final_output(heatmap, center, scale, threshhold)

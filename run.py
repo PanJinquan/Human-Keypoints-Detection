@@ -73,7 +73,6 @@ class PoseEstimation(inference.PoseEstimation):
             count += 1
         video_cap.release()
 
-    @debug.run_time_decorator("detect_person")
     def detect_person(self, image):
         bbox_score, labels = self.detector.detect(image, isshow=False)
         boxes, scores = [], []
@@ -82,12 +81,10 @@ class PoseEstimation(inference.PoseEstimation):
             scores = bbox_score[:, 4:5]
         return boxes, scores
 
-    @debug.run_time_decorator("detect_pose")
     def detect_pose(self, image, boxes, threshhold):
         kp_points, kp_scores = self.detect(image, boxes, threshhold=threshhold)
         return kp_points, kp_scores
 
-    @debug.run_time_decorator("detect_image")
     def detect_image(self, frame, threshhold=0.8, detect_person=False):
         '''
         :param frame: bgr image
